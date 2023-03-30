@@ -1,21 +1,18 @@
 pipeline {
-  agent any
-  
-  stages {
-    stage('Scan CloudFormation Template with cfn-lint') {
-      steps {
-        // Checkout the GitHub repository
-        git url: 'https://github.com/atharva23/LintChecker.git'
-        
-        // Install cfn-lint
-        sh 'pip3 install cfn-lint'
-        
-        // Scan the CloudFormation template using cfn-lint
-        sh 'cfn-lint volume.yml'
-      }
+    agent any
+    environment {
+        GIT_REPO = "https://github.com/atharva23/LintChecker.git"
     }
-    
-
-
-  }
+    stages {
+        stage('Clone repository') {
+            steps {
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: "${env.GIT_REPO}"]]])
+            }
+        }
+        stage('Scan CloudFormation templates') {
+            steps {
+                sh "cfn-lint ./*.yml"
+            }
+        }
+    }
 }
