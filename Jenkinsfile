@@ -1,25 +1,19 @@
 pipeline {
-    agent any
-
-    stages {
-        stage('Checkout') {
-            steps {
-                git branch: 'main', url: 'https://github.com/atharva23/LintChecker'
-            }
-        }
-
-        stage('Install cfn-lint') {
-            steps {
-                sh 'pip3 install cfn-lint'
-                sh 'which cfn-lint'
-                sh 'cfn-lint --version'
-            }
-        }
-
-        stage('Scan CloudFormation template') {
-            steps {
-                sh 'cfn-lint --template volume.yml'
-            }
-        }
+  agent any
+  
+  stages {
+    stage('Scan CloudFormation Template with cfn-lint') {
+      steps {
+        // Checkout the GitHub repository
+        git url: 'https://github.com/atharva23/LintChecker'
+        
+        // Install cfn-lint
+        sh 'pip install cfn-lint'
+        
+        // Scan the CloudFormation template using cfn-lint
+        sh 'cfn-lint volume.yml'
+      }
     }
+    
+  }
 }
