@@ -11,13 +11,14 @@ pipeline {
         stage('Install cfn-lint') {
             steps {
                 sh 'pip3 install cfn-lint'
-                sh '/usr/local/bin/cfn-lint --version'
+                sh 'which cfn-lint'
+                sh 'cfn-lint --version'
             }
         }
 
         stage('Scan CloudFormation template') {
             steps {
-                sh 'cfn-lint --template volume.yaml'
+                sh 'cfn-lint --template volume.yml'
             }
         }
     }
