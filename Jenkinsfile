@@ -8,7 +8,7 @@ pipeline {
         git url: 'https://github.com/atharva23/LintChecker'
         
         // Install cfn-lint
-        sh 'pip install cfn-lint'
+        sh 'pip3 install cfn-lint'
         
         // Scan the CloudFormation template using cfn-lint
         sh 'cfn-lint volume.yml'
