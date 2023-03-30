@@ -16,7 +16,7 @@ pipeline {
 
         stage('Scan CloudFormation template') {
             steps {
-                sh 'cfn-lint path/to/your/cloudformation/volume.yaml'
+                sh 'cfn-lint volume.yaml'
             }
         }
     }
