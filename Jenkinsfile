@@ -1,17 +1,23 @@
 pipeline {
     agent any
 
-    environment {
-        DOCKER_IMAGE_NAME = "nginx"
-        DOCKERFILE_PATH = "./Dockerfile"
-
     stages {
-        stage('Build Docker image') {
+        stage('Checkout') {
             steps {
-                sh "docker build -t $DOCKER_IMAGE_NAME -f $DOCKERFILE_PATH ."
+                git branch: 'main', url: 'https://github.com/atharva23/LintChecker'
             }
         }
 
+        stage('Install cfn-lint') {
+            steps {
+                sh 'pip install cfn-lint'
+            }
+        }
 
+        stage('Scan CloudFormation template') {
+            steps {
+                sh 'cfn-lint path/to/your/cloudformation/volume.yaml'
+            }
+        }
     }
 }
