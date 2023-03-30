@@ -12,7 +12,7 @@ pipeline {
         }
         stage('Scan CloudFormation templates') {
             steps {
-                sh "${env.CFN_LINT_PATH} volume.yml"
+                sh "find . -name '*.yml' -o -name '*.json' | xargs ${env.CFN_LINT_PATH}"
             }
         }
     }
