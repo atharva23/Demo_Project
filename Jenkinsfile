@@ -10,7 +10,7 @@ pipeline {
 
         stage('Install cfn-lint') {
             steps {
-                sh 'pip3 install cfn-lint'
+                
                 sh 'cfn-lint --version'
             }
         }
