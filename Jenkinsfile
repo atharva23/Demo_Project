@@ -10,14 +10,14 @@ pipeline {
 
         stage('Install cfn-lint') {
             steps {
-                sh 'pwd'
+                sh 'pip install cfn-lint'
                 sh 'cfn-lint --version'
             }
         }
 
         stage('Scan CloudFormation template') {
             steps {
-                sh 'cfn-lint --input-path volume.yaml'
+                sh 'cfn-lint --template volume.yaml'
             }
         }
     }
