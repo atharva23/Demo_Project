@@ -14,6 +14,6 @@ pipeline {
         sh 'cfn-lint volume.yml'
       }
     }
-    
   }
+  
 }
