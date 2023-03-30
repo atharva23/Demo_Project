@@ -16,7 +16,7 @@ pipeline {
 
         stage('Scan CloudFormation template') {
             steps {
-                sh 'cfn-lint volumee.yaml'
+                sh 'sudo cfn-lint volume.yml'
             }
         }
     }
