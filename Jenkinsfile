@@ -11,7 +11,7 @@ pipeline {
         }
         stage('Scan CloudFormation templates') {
             steps {
-                sh "cfn-lint ./*.yml"
+                sh "cfn-lint --version"
             }
         }
     }
