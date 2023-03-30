@@ -1,0 +1,6 @@
+repos:
+-   repo: https://github.com/atharva23/LintChecker
+    rev: v0.15.0 # The version of cfn-lint to use
+    hooks:
+    -   id: cfn-lint
+        files: templates/.*\.(json|yml|yaml)$
