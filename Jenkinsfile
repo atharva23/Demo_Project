@@ -1,22 +1,19 @@
 pipeline {
     agent any
-
     environment {
         GIT_REPO = "https://github.com/atharva23/LintChecker.git"
         CFN_LINT_PATH = "~/.local/bin/cfn-lint"
     }
-
     stages {
         stage('Clone repository') {
             steps {
-                git branch: 'main', url: "${env.GIT_REPO}"
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: "${env.GIT_REPO}"]]])
             }
         }
-
         stage('Scan CloudFormation templates') {
             steps {
-                sh 'cfn-lint -version'
-                sh "find . -name '*.yml' -o -name '*.json' -print0 | xargs -0 ${env.CFN_LINT_PATH}"
+                sh "pwd"
+                sh "find . -name '*.yml' -o -name '*.json' | xargs ${env.CFN_LINT_PATH}"
             }
         }
     }
