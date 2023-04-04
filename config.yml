@@ -1,0 +1,5 @@
+---
+Rules:
+  # Exclude a specific line
+  E3002:
+    exclude: 'my excluded line'
