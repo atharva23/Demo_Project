@@ -14,7 +14,6 @@ pipeline {
             steps {
                 sh "pwd"
                 sh "find . -name '*.yml' -o -name '*.json' | xargs ~/.local/bin/cfn-lint"
-"
             }
         }
     }
