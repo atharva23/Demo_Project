@@ -21,7 +21,9 @@ pipeline {
                     if (recentCommit == prevCommit) {
                         echo "No new commit"
                     } else {
-                        sh "git diff --name-only ${recentCommit} ${prevCommit} | grep -E '.*.yml' | xargs ${env.CFN_LINT_PATH}"
+                        
+                        
+                        sh "git diff --name-only HEAD HEAD~1 | grep -E '.*.yml' | xargs ${env.CFN_LINT_PATH}"
                     }
                 }
             }
