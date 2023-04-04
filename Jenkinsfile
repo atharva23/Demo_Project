@@ -4,7 +4,7 @@ pipeline {
     environment {
         GIT_REPO = "https://github.com/atharva23/LintChecker.git"
         CFN_LINT_PATH = "~/.local/bin/cfn-lint"
-        PATH = "$PATH:${env.CFN_LINT_PATH}"
+        
     }
 
     stages {
@@ -17,7 +17,7 @@ pipeline {
         stage('Scan CloudFormation templates') {
             steps {
                
-                sh "cfn-lint \${find . -name '*.yml' -o -name '*.json'}"
+                sh "find . -name '*.yml' -o -name '*.json' | xargs ${env.CFN_LINT_PATH}"
 
             }
         }
