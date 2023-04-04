@@ -16,9 +16,7 @@ pipeline {
             steps {
                 sh "git diff --name-only HEAD HEAD~1 | grep -E '.*.yml' | xargs ${env.CFN_LINT_PATH}"
             }
-        }
-
-        
-        }        
+        }       
+             
     }
 }
