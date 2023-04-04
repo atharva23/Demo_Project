@@ -7,11 +7,6 @@ pipeline {
        
     }
     stages {
-        stage('install cfn') {
-            steps {
-                sh 'pip3 install cfn-lint'
-            }
-        }        
         
         stage('Clone repository') {
             steps {
