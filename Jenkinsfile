@@ -15,18 +15,12 @@ pipeline {
 
         stage('Scan CloudFormation templates') {
             steps {
-                script {
-                    def recentCommit = sh(script: "git log -n 1 --pretty=format:'%H'", returnStdout: true).trim()
-                    def prevCommit = sh(script: "git log -n 2 --skip=1 --pretty=format:'%H'", returnStdout: true).trim()
-                    if (recentCommit == prevCommit) {
-                        echo "No new commit"
-                    } else {
+                script {               
                         
                         
                         sh "git diff --name-only HEAD HEAD~1 | grep -E '.*.yml' | xargs ${env.CFN_LINT_PATH}"
                     }
-                }
-            }
+            
         }        
     }
 }
