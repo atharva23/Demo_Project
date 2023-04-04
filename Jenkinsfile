@@ -14,10 +14,20 @@ pipeline {
         }
         stage('Scan CloudFormation templates') {
             steps {
-                              
-                  sh "find . -name '*.yml' -o -name '*.json' |  xargs ${env.CFN_LINT_PATH}"
-
+                script {
+                    def changedFiles = sh(
+                        script: "git diff --name-only HEAD HEAD~1 | grep -E '.*\\.(yml|json)$'",
+                        returnStdout: true
+                    ).trim()
+                    if (!changedFiles) {
+                        echo "No CloudFormation templates were changed in the last commit."
+                    } else {
+                        sh "echo \"Scanning the following files: ${changedFiles}\""
+                        sh "echo \"\""
+                        sh "echo ${changedFiles} | xargs ${env.CFN_LINT_PATH}"
+                    }
+                }
             }
-        }
+        
     }
 }
