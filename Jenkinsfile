@@ -16,7 +16,7 @@ pipeline {
             steps {
                 script {
                     def changedFiles = sh(
-                        script: "git diff --name-only HEAD HEAD~1 | grep -E '.*\\.yml'",
+                        script: "git diff --name-only HEAD HEAD~1 | grep -E '\\.yaml\$'",
                         returnStdout: true
                     ).trim()
                     if (!changedFiles) {
