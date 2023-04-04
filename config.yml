@@ -1,5 +1,5 @@
----
-Rules:
-  # Exclude a specific line
-  E3002:
-    exclude: 'my excluded line'
+rules:
+  # Exclude any lines containing the text "DO_NOT_SCAN"
+  BlacklistPropertyDefinition:
+    blacklist:
+      - "MySensitiveValue"
