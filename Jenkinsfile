@@ -7,6 +7,12 @@ pipeline {
        
     }
     stages {
+        stage('install cfn') {
+            steps {
+                sh 'pip3 install cfn-lint'
+            }
+        }        
+        
         stage('Clone repository') {
             steps {
                 checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: "${env.GIT_REPO}"]]])
