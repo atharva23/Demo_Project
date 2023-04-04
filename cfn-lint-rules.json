@@ -1,0 +1,10 @@
+{
+    "rules": {
+        "no-sensitive-values": {
+            "severity": "Informational",
+            "pattern": "(MySensitiveValue)",
+            "message": "Sensitive value detected"
+        }
+    },
+    "append-rules": true
+}
