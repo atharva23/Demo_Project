@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         GIT_REPO = "https://github.com/atharva23/LintChecker.git"
-        CFN_LINT_PATH = "~/.local/bin/cfn-lint"
+        CFN_LINT_PATH = "~/.local/bin"
     }
     stages {
         stage('Clone repository') {
