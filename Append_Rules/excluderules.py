@@ -1,7 +1,7 @@
 from cfnlint.rules import CloudFormationLintRule
 from cfnlint.rules import RuleMatch
 
-class ExcludeRule(CloudFormationLintRule):
+class excluderules(CloudFormationLintRule):
     id = 'E0000'
     shortdesc = 'Exclude specific line'
     description = 'Exclude a specific line in the CloudFormation template'
