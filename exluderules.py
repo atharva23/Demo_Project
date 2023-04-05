@@ -1,6 +1,6 @@
 import cfnlint
 
-def exclude_this_line(rule_id, rule_text, path, **kwargs):
+def excluderules(rule_id, rule_text, path, **kwargs):
     template = cfnlint.decode.decode(path)
     for idx, line in enumerate(template.split('\n')):
         if 'ExcludeThisLine: true' in line:
