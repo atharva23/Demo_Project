@@ -10,7 +10,7 @@ pipeline {
                 script {
                     git url: 'https://github.com/atharva23/LintChecker.git', branch: 'main'
                     sh 'pip3 install cfn-lint'
-                    sh "find . -name '*.yml'  | xargs ${env.CFN_LINT_PATH} -a config.yml"
+                    sh "find . -name '*.yml'  | xargs ${env.CFN_LINT_PATH} -a exluderules.yml"
                    
                    
                 }
