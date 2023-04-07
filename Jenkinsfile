@@ -19,7 +19,7 @@ pipeline {
                     // Scan CloudFormation templates using cfn-lint
                     def LINT_FAILED = 0
                     for (i in LINT_FILES) {
-                        def result = sh script: "${env.CFN_LINT_PATH} -s registry-schemas --ignore-checks E3008 ${i}", returnStatus: true
+                        def result = sh script: "${env.CFN_LINT_PATH}  ${i}", returnStatus: true
                         if (result != 0 && result != 8) {
                             LINT_FAILED = 1
                         }
