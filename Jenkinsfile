@@ -15,6 +15,7 @@ pipeline {
                     
                     // List all CloudFormation templates
                     def LINT_FILES = sh(script: "find . -name '*.yml'", returnStdout: true).trim().split('\n')
+                    echo "LINT_FILES: ${LINT_FILES}"
                     
                     // Scan CloudFormation templates using cfn-lint
                     def LINT_FAILED = 0
