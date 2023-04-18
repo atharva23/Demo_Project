@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         CFN_LINT_PATH = "~/.local/bin/cfn-lint"
-        TEMP_FOLDER = "/tmp/cloudformation-templates"
+        TEMP_FOLDER = "./temp_templates"
     }
     stages {
         stage('Scan CloudFormation templates') {
@@ -18,20 +18,20 @@ pipeline {
                     def LINT_FILES = sh(script: "find . -name '*.yml'", returnStdout: true).trim().split('\n')
                     echo "LINT_FILES: ${LINT_FILES}"
                     
-                    // Replace Ansible variable with a number in all files and copy them to a temporary folder
-                    sh "mkdir -p ${TEMP_FOLDER}"
-                    for (i in LINT_FILES) {
-                        sh "sed 's/{{ my_ansible_var }}/123/g' ${i} > ${TEMP_FOLDER}/${i}"
-                    }
-                    
-                    // List CloudFormation templates in temporary folder
-                    def TEMP_LINT_FILES = sh(script: "find ${TEMP_FOLDER} -name '*.yml'", returnStdout: true).trim().split('\n')
-                    echo "TEMP_LINT_FILES: ${TEMP_LINT_FILES}"
-                    
                     // Scan CloudFormation templates using cfn-lint
                     def LINT_FAILED = 0
-                    for (i in TEMP_LINT_FILES) {
-                        def result = sh script: "${env.CFN_LINT_PATH} ${i}", returnStatus: true
+                    for (i in LINT_FILES) {
+                        // Create temporary folder structure
+                        def dir_path = i.substring(0, i.lastIndexOf('/'))
+                        def dir_name = dir_path.replaceAll('/', '_')
+                        def temp_dir_path = "${TEMP_FOLDER}/${dir_name}"
+                        sh "mkdir -p ${temp_dir_path}"
+                        
+                        // Replace Ansible variable and copy to temporary folder
+                        sh "sed -i 's/\${AnsibleVar}/123/g' ${i} && sed -i '/\${AnsibleVar}/a Ansible variable replaced with 123' ${i} && cp ${i} ${temp_dir_path}/${i.substring(i.lastIndexOf('/') + 1)}"
+                        
+                        // Scan the modified template using cfn-lint
+                        def result = sh script: "${env.CFN_LINT_PATH} ${temp_dir_path}/${i.substring(i.lastIndexOf('/') + 1)}", returnStatus: true
                         if (result != 0 && result != 8) {
                             LINT_FAILED = 1
                         }
