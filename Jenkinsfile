@@ -21,7 +21,8 @@ pipeline {
                     // Replace Ansible variables in CloudFormation templates and copy to temporary folder
                     for (i in LINT_FILES) {
                         sh "mkdir -p ${TEMP_FOLDER}"
-                        sh "sed 's/\\$[{]*[a-zA-Z0-9_]*[}]*/123/g' ${i} | awk '{print} /123/{print \"Ansible variable replaced with 123\"}' > ${TEMP_FOLDER}/${i}"
+                        sh "sed 's/\\$[{]*[a-zA-Z0-9_]*[}]*/123/g' ${i} > ${TEMP_FOLDER}/${i}"
+
 
                     }
                     
