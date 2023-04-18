@@ -24,6 +24,7 @@ pipeline {
                         sh "sed \"s/\\$[{]*[a-zA-Z0-9_]*[}]*/123/g\" ${i} > ${TEMP_FOLDER}/${i}"
 
 
+
                     }
                     
                     // Scan CloudFormation templates using cfn-lint
