@@ -28,7 +28,7 @@ pipeline {
                         sh "mkdir -p ${temp_dir_path}"
                         
                         // Replace Ansible variable and copy to temporary folder
-                        sh "sed -i 's/{{ \([a-zA-Z0-9_]*\) }}/123/g' ${i} && sed -i '/\${AnsibleVar}/a Ansible variable replaced with 123' ${i} && cp ${i} ${temp_dir_path}/${i.substring(i.lastIndexOf('/') + 1)}"
+                        sh "sed -i 's/{{ \\([a-zA-Z0-9_]*\\) }}/${env.\\1}/g' ${i} && sed -i '/\${AnsibleVar}/a Ansible variable replaced with 123' ${i} && cp ${i} ${temp_dir_path}/${i.substring(i.lastIndexOf('/') + 1)}"
                         
 
                         // Scan the modified template using cfn-lint
