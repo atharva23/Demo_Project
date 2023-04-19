@@ -41,6 +41,8 @@ pipeline {
                     def TEMP_FILES = sh(script: "find ${TEMP_FOLDER} -name '*.yml'", returnStdout: true).trim().split('\n')
                     echo "${TEMP_FILES}"
                     
+                    sh "rm -rf ${TEMP_FOLDER}"
+                    
                     // Fail the build if there were lint errors
                     if (LINT_FAILED == 1) {
                         error('CloudFormation templates failed linting')
