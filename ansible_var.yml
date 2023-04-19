@@ -4,18 +4,19 @@ AWSTemplateFormatVersion: "2010-09-09"
 Description: "CloudFormation template with Ansible variable"
 
 Parameters:
-  AnsibleVar:
+  VpcCidrBlock:
     Type: String
-    Default: "default_value"
-    Description: "An Ansible variable"
+    Default: "10.0.0.0/16"
+    Description: "The CIDR block for the VPC"
 
 Resources:
-  MyEC2Instance:
-    Type: AWS::EC2::Instance
+  VPC:
+    Type: AWS::EC2::VPC
     Properties:
-      InstanceType: t2.micro
-      ImageId: ami-0c94855ba95c71c99
-      UserData:
-        Fn::Base64: !Sub |
-          #!/bin/bash
-          echo "AnsibleVar={{ ${AnsibleVar} }}" >> /etc/ansible/facts.d/my_facts.fact
+      CidrBlock: "{{ VpcCidrBlock }}"
+      EnableDnsSupport: true
+      EnableDnsHostnames: true
+      InstanceTenancy: default
+      Tags:
+        - Key: Environment
+          Value: !Ref Environment
