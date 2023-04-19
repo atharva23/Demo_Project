@@ -23,7 +23,7 @@ pipeline {
                     for (i in LINT_FILES) {
                         // Create temporary folder structure
                         def dir_path = i.substring(0, i.lastIndexOf('/'))
-                        def dir_name = dir_path.replaceAll('/', '_')
+                        def dir_name = dir_path.replaceAll('/', '')
                         def temp_dir_path = "${TEMP_FOLDER}/${dir_name}"
                         sh "mkdir -p ${temp_dir_path}"
                         
