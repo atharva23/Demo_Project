@@ -32,12 +32,7 @@ pipeline {
                         // This line constructs the temporary folder path using the TEMP_FOLDER environment variable and the dir_name variable.
                         
                         sh "mkdir -p ${temp_dir_path}"
-                        repository.
-
-
-
-
-
+                    
                         // Replace Ansible variable and copy to temporary folder
                         sh "sed -i 's/{{ \\([a-zA-Z0-9_]*\\) }}/123/g' ${i} && sed -i '/\${AnsibleVar}/a Ansible variable replaced with 123' ${i} && cp ${i} ${temp_dir_path}/${i.substring(i.lastIndexOf('/') + 1)}"
                        
