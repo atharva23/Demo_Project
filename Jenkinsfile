@@ -23,10 +23,21 @@ pipeline {
                     for (i in LINT_FILES) {
                         // Create temporary folder structure
                         def dir_path = i.substring(0, i.lastIndexOf('/'))
-                        def dir_name = dir_path.replaceAll('/', '')
-                        def temp_dir_path = "${TEMP_FOLDER}/${dir_name}"
-                        sh "mkdir -p ${temp_dir_path}"
+                        //This line gets the directory path of the current file by removing the file name from the full path.
                         
+                        def dir_name = dir_path.replaceAll('/', '')
+                        //This line replaces all the forward slashes in the directory path with underscores, so that the directory name can be used in the temporary folder path.
+
+                        def temp_dir_path = "${TEMP_FOLDER}/${dir_name}"
+                        // This line constructs the temporary folder path using the TEMP_FOLDER environment variable and the dir_name variable.
+                        
+                        sh "mkdir -p ${temp_dir_path}"
+                        repository.
+
+
+
+
+
                         // Replace Ansible variable and copy to temporary folder
                         sh "sed -i 's/{{ \\([a-zA-Z0-9_]*\\) }}/123/g' ${i} && sed -i '/\${AnsibleVar}/a Ansible variable replaced with 123' ${i} && cp ${i} ${temp_dir_path}/${i.substring(i.lastIndexOf('/') + 1)}"
                        
