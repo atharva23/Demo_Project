@@ -3,12 +3,6 @@
 AWSTemplateFormatVersion: "2010-09-09"
 Description: "CloudFormation template with Ansible variable"
 
-Parameters:
-  MyParameter:
-    Type: String
-    Default: "Hello, Ansible!"
-    Description: "A parameter that includes an Ansible variable"
-
 Resources:
   MyBucket:
     Type: "AWS::S3::Bucket"
