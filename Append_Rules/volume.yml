@@ -4,19 +4,13 @@ AWSTemplateFormatVersion: "2010-09-09"
 Description: "CloudFormation template with Ansible variable"
 
 Parameters:
-  VpcCidrBlock:
+  MyParameter:
     Type: String
-    Default: "10.0.0.0/16"
-    Description: "The CIDR block for the VPC"
+    Default: "Hello, Ansible!"
+    Description: "A parameter that includes an Ansible variable"
 
 Resources:
-  VPC:
-    Type: AWS::EC2::VPC
+  MyBucket:
+    Type: "AWS::S3::Bucket"
     Properties:
-      CidrBlock: "{{ VpcCidrBlock }}"
-      EnableDnsSupport: true
-      EnableDnsHostnames: true
-      InstanceTenancy: default
-      Tags:
-        - Key: Environment
-          Value: !Ref Environment
+      BucketName: "{{ MyParameter }}"
