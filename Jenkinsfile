@@ -25,11 +25,11 @@ pipeline {
                         
                         // Create temporary folder structure
                         def dir_path = i.substring(0, i.lastIndexOf('/'))
-                        //This line gets the directory path of the current file by removing the file name from the full path.
                         
+                        //This line gets the directory path of the current file by removing the file name from the full path.                        
                         def temp_dir_path = "${TEMP_FOLDER}/${dir_path}"
-                        // This line constructs the temporary folder path using the TEMP_FOLDER environment variable and the dir_name variable.
                         
+                        // This line constructs the temporary folder path using the TEMP_FOLDER environment variable and the dir_name variable.                        
                         sh "mkdir -p ${temp_dir_path}"
                      
                     
