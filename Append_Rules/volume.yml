@@ -1,14 +1,22 @@
 
+---
 AWSTemplateFormatVersion: "2010-09-09"
+Description: "CloudFormation template with Ansible variable"
 
-Description: cfn_nag demo template
+Parameters:
+  VpcCidrBlock:
+    Type: String
+    Default: "10.0.0.0/16"
+    Description: "The CIDR block for the VPC"
 
 Resources:
-  EBSVolume:    
-    Type: "AWS::EC2::Volume"
+  VPC:
+    Type: AWS::EC2::VPC
     Properties:
-      Encrypted: false
-      AvailabilityZone: 
-        Fn::Select: 
-          - 0
-          - Fn::GetAZs: ""
+      CidrBlock: "{{ VpcCidrBlock }}"
+      EnableDnsSupport: true
+      EnableDnsHostnames: true
+      InstanceTenancy: default
+      Tags:
+        - Key: Environment
+          Value: !Ref Environment
