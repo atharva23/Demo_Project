@@ -1,0 +1,15 @@
+
+---
+AWSTemplateFormatVersion: "2010-09-09"
+Description: "CloudFormation template with Ansible variable"
+
+
+Resources:
+  VPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: "{{ VpcCidrBlock }}"
+      EnableDnsSupport: true
+      EnableDnsHostnames: true
+      InstanceTenancy: default
+     
