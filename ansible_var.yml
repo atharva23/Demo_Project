@@ -12,6 +12,4 @@ Resources:
       EnableDnsSupport: true
       EnableDnsHostnames: true
       InstanceTenancy: default
-      Tags:
-        - Key: Environment
-          Value: !Ref Environment
+     
