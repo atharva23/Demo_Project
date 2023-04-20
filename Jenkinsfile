@@ -45,12 +45,7 @@ pipeline {
                         if (result != 0 && result != 8) {
                             LINT_FAILED = 1
                         }
-                    }
-                    
-                    echo "Temporary files:"
-                    def TEMP_FILES = sh(script: "find ${TEMP_FOLDER} -name '*.yml'", returnStdout: true).trim().split('\n')
-                    echo "${TEMP_FILES}"
-                   
+                    }          
                     
                     sh "rm -rf ${TEMP_FOLDER}"
                     
