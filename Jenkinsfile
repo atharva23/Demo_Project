@@ -34,8 +34,10 @@ pipeline {
                      
                     
                         // Replace Ansible variable and copy to temporary folder
-                        sh "sed -i 's/{{ \\([^}]*\\) }}/abc/g' ${i} && sed -i '/\${AnsibleVar}/a Ansible variable replaced with 123' ${i} && cp ${i} ${temp_dir_path}/${i.substring(i.lastIndexOf('/') + 1)}"
-                        sh "echo 'Original file contents:' && cat ${i}"
+                        sh "sed -i '/\${AnsibleVar}/a Ansible variable replaced with abc' ${temp_file} && sed -i 's/{{ \\([^}]*\\) }}/abc/g' ${temp_file}"
+                        
+                      
+
                         sh "cat ${temp_dir_path}/${i.substring(i.lastIndexOf('/') + 1)}"
 
 
