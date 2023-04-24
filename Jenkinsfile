@@ -40,7 +40,9 @@ pipeline {
 
                         // Replace Ansible variables in the copied file
                         sh "sed -i 's/{{ \\([^}]*\\) }}/abc/g' ${temp_dir_path}/${i.substring(i.lastIndexOf('/') + 1)}" 
-
+                        
+                        
+                        sh "cat ${i}"
                         sh "cat ${temp_dir_path}/${i.substring(i.lastIndexOf('/') + 1)}"
 
 
