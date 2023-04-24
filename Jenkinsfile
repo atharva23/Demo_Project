@@ -33,7 +33,7 @@ pipeline {
                         sh "mkdir -p ${temp_dir_path}"
                      
                     
-                        // Replace Ansible variable and copy to temporary folder
+                      
                         
                         // Copy the original file to the temporary folder
                         sh "cp ${i} ${temp_dir_path}/${i.substring(i.lastIndexOf('/') + 1)}"
