@@ -48,7 +48,7 @@ pipeline {
 
                         // Scan the modified template using cfn-lint
                         
-                        def result = sh script: "${env.CFN_LINT_PATH} ${temp_dir_path}/${i.substring(i.lastIndexOf('/') + 1)}  --ignore-checks E3031 ", returnStatus: true
+                        def result = sh script: "${env.CFN_LINT_PATH} ${temp_dir_path}/${i.substring(i.lastIndexOf('/') + 1)}  ", returnStatus: true
 
                         if (result != 0 && result != 8) {
                             LINT_FAILED = 1
