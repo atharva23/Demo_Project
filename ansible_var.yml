@@ -1,8 +1,6 @@
-
 ---
 AWSTemplateFormatVersion: "2010-09-09"
 Description: "CloudFormation template with Ansible variable"
-
 
 Resources:
   VPC:
@@ -13,4 +11,9 @@ Resources:
       EnableDnsSupport: true
       EnableDnsHostnames: true
       InstanceTenancy: default
-     
+
+Metadata:
+  cfn-lint:
+    config:
+      ignore_checks:
+        - E3031
