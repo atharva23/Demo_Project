@@ -46,7 +46,7 @@ pipeline {
                         sh "cat ${temp_dir_path}/${i.substring(i.lastIndexOf('/') + 1)}"
 
 
-                        // Scan the modified template using cfn-lint
+                        // Scan the modified template using cfn-lint  --ignore-checks E3031 
                         
                         def result = sh script: "${env.CFN_LINT_PATH} ${temp_dir_path}/${i.substring(i.lastIndexOf('/') + 1)}  ", returnStatus: true
 
