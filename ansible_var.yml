@@ -8,7 +8,8 @@ Resources:
   VPC:
     Type: AWS::EC2::VPC
     Properties:
-      CidrBlock: "{{ VpcCidrBlock }}"
+      CidrBlock: "{{ VpcCidrBlock }}"  # cfn-lint:ignore=E1010
+
       EnableDnsSupport: true
       EnableDnsHostnames: true
       InstanceTenancy: default
