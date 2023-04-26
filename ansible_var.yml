@@ -11,6 +11,15 @@ Resources:
       EnableDnsSupport: true
       EnableDnsHostnames: true
       InstanceTenancy: default
+      
+  AnotherVPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: "{{ AnotherVpcCidrBlock }}"
+      EnableDnsSupport: true
+      EnableDnsHostnames: true
+      InstanceTenancy: default
+     
 
 Metadata:
   cfn-lint:
